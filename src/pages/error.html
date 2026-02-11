@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Страница ошибки</title>
+    <link rel="stylesheet" href="./css/error-page.css" />
+  </head>
+  <body>
+    <main class="error-layout">
+      <section class="error-card" aria-label="Экран ошибки">
+        <img class="error-logo" src="./assets/brand-logo.svg" alt="tuta" width="128" height="48" />
+
+        <div class="error-card__content">
+          <div class="error-card__left">
+            <a class="error-back" href="./index.html" aria-label="Вернуться назад">Назад</a>
+            <h1 class="error-title" id="error-title">Имя ошибки</h1>
+            <p class="error-subtitle" id="error-description">Описание ошибки</p>
+            <a class="error-submit" id="error-action" href="#" hidden>Действие</a>
+          </div>
+
+          <div class="error-card__right" aria-hidden="true">
+            <div class="error-illustration-wrap">
+              <img src="./assets/error-illustration.svg" alt="" width="597" height="512" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>

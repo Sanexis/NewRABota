@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="./css/register-page.css" />
+  </head>
+  <body>
+    <main class="register-layout">
+      <section class="register-card" aria-label="Форма регистрации">
+        <img class="register-logo" src="./assets/brand-logo.svg" alt="tuta" width="128" height="48" />
+
+        <div class="register-card__content">
+          <div class="register-card__left">
+            <a class="register-back" href="./index.html" aria-label="Вернуться назад">Назад</a>
+            <h1 class="register-title">Регистрация</h1>
+
+            <div class="register-steps" aria-label="Этапы регистрации">
+              <button class="register-step is-active" type="button" data-step="1">
+                <span class="register-step__index">1</span>
+                <span>Данные для входа</span>
+              </button>
+              <span class="register-step__line"></span>
+              <button class="register-step" type="button" data-step="2">
+                <span class="register-step__index">2</span>
+                <span>Персональные данные</span>
+              </button>
+              <span class="register-step__line"></span>
+              <button class="register-step" type="button" data-step="3">
+                <span class="register-step__index">3</span>
+                <span>Оборудование</span>
+              </button>
+            </div>
+
+            <div id="register-step-root">
+              <section class="register-step-panel" data-step-panel="1">
+                <form class="register-form" action="javascript:void(0)" method="post">
+                  <label class="register-field">
+                    <span>Email</span>
+                    <input type="email" placeholder="tuta@gmail.com" autocomplete="email" />
+                  </label>
+
+                  <label class="register-check register-check--top">
+                    <input type="radio" name="registerLoginType" value="email" checked />
+                    <span>Выбрать email в качестве логина</span>
+                  </label>
+
+                  <label class="register-field">
+                    <span>Номер телефона</span>
+                    <input type="tel" placeholder="+375 (29) 111-11-11" autocomplete="tel-national" />
+                  </label>
+
+                  <label class="register-check register-check--top">
+                    <input type="radio" name="registerLoginType" value="phone" />
+                    <span>Выбрать номер телефона в качестве логина</span>
+                  </label>
+
+                  <label class="register-field register-field--password">
+                    <span>Придумайте пароль</span>
+                    <input id="register-password" type="password" placeholder="7789BM6X@@H&$K_" autocomplete="new-password" />
+                    <button class="password-visibility" type="button" data-toggle-target="register-password" aria-label="Показать пароль"></button>
+                  </label>
+
+                  <label class="register-field register-field--password">
+                    <span>Повторите пароль</span>
+                    <input id="register-password-repeat" type="password" placeholder="7789BM6X@@H&$K_" autocomplete="new-password" />
+                    <button class="password-visibility" type="button" data-toggle-target="register-password-repeat" aria-label="Показать пароль"></button>
+                  </label>
+
+                  <label class="register-check">
+                    <input type="checkbox" data-required-consent="true" />
+                    <span>Я согласен с <a href="#">Политикой обработки персональных данных</a> <em>*</em></span>
+                  </label>
+                  <label class="register-check">
+                    <input type="checkbox" data-required-consent="true" />
+                    <span>Я согласен с <a href="#">Правилом оказания услуг</a> <em>*</em></span>
+                  </label>
+                  <label class="register-check">
+                    <input type="checkbox" data-required-consent="true" />
+                    <span>Ознакомлен с <a href="#">Договором оферты</a> <em>*</em></span>
+                  </label>
+
+                  <button class="register-submit" type="button" data-next-step="2">Продолжить</button>
+                </form>
+
+                <p class="register-login-link">
+                  Есть аккаунт?
+                  <a href="./login.html">Авторизация</a>
+                </p>
+              </section>
+
+              <section class="register-step-panel" data-step-panel="2" hidden>
+                <form class="register-form" action="javascript:void(0)" method="post">
+                  <label class="register-field">
+                    <span>ФИО</span>
+                    <input type="text" placeholder="Иванов Иван Иванович" />
+                  </label>
+
+                  <div class="register-gender" role="group" aria-label="Пол">
+                    <button class="register-gender__option is-active" type="button">Мужской</button>
+                    <button class="register-gender__option" type="button">Женский</button>
+                  </div>
+
+                  <div class="register-grid register-grid--2">
+                    <label class="register-field register-field--icon-help">
+                      <span>Идентификационный номер</span>
+                      <input type="text" placeholder="12345678901AB2" />
+                    </label>
+                    <label class="register-field register-field--icon-calendar">
+                      <span>Дата рождения</span>
+                      <input type="text" placeholder="01 января 1991" />
+                    </label>
+                  </div>
+
+                  <div class="register-grid register-grid--3">
+                    <label class="register-field">
+                      <span>Область</span>
+                      <input type="text" placeholder="Гомельская" />
+                    </label>
+                    <label class="register-field">
+                      <span>Район</span>
+                      <input type="text" placeholder="Гомельский" />
+                    </label>
+                    <label class="register-field">
+                      <span>Город</span>
+                      <input type="text" placeholder="Гомель" />
+                    </label>
+                  </div>
+
+                  <div class="register-grid register-grid--2-addr">
+                    <label class="register-field">
+                      <span>Почтовый индекс</span>
+                      <input type="text" placeholder="1234567" />
+                    </label>
+                    <label class="register-field">
+                      <span>Полный адрес</span>
+                      <input type="text" placeholder="ул. К. Маркса, кв.724, подъезд 4" />
+                    </label>
+                  </div>
+
+                  <div class="register-actions">
+                    <button class="register-submit register-submit--secondary" type="button" data-prev-step="1">Назад</button>
+                    <button class="register-submit" type="button" data-next-step="3">Продолжить</button>
+                  </div>
+                </form>
+              </section>
+
+              <section class="register-step-panel" data-step-panel="3" hidden>
+                <form class="register-form" action="javascript:void(0)" method="post">
+                  <label class="register-field">
+                    <span>Модель оборудования</span>
+                    <input type="text" placeholder="Введите модель" />
+                  </label>
+                  <label class="register-field">
+                    <span>Серийный номер</span>
+                    <input type="text" placeholder="Введите серийный номер" />
+                  </label>
+
+                  <div class="register-actions">
+                    <button class="register-submit register-submit--secondary" type="button" data-prev-step="2">Назад</button>
+                    <button class="register-submit" type="submit">Завершить регистрацию</button>
+                  </div>
+                </form>
+              </section>
+            </div>
+          </div>
+
+          <div class="register-card__right" aria-hidden="true">
+            <div class="register-illustration-wrap">
+              <img src="./assets/forgot-password-illustration.svg" alt="" width="528" height="364" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
