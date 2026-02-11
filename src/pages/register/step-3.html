@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация — Шаг 3</title>
+    <link rel="stylesheet" href="../css/register-page.css" />
+  </head>
+  <body>
+    <main class="register-layout">
+      <section class="register-card" aria-label="Регистрация, шаг 3">
+        <img class="register-logo" src="../assets/brand-logo.svg" alt="tuta" width="128" height="48" />
+        <div class="register-card__content">
+          <div class="register-card__left">
+            <a class="register-back" href="./step-2.html" aria-label="Вернуться назад">Назад</a>
+            <h1 class="register-title">Регистрация</h1>
+            <div class="register-steps" aria-label="Этапы регистрации">
+              <button class="register-step is-completed" type="button"><span class="register-step__index">1</span><span>Данные для входа</span></button>
+              <span class="register-step__line"></span>
+              <button class="register-step is-completed" type="button"><span class="register-step__index">2</span><span>Персональные данные</span></button>
+              <span class="register-step__line"></span>
+              <button class="register-step is-active" type="button"><span class="register-step__index">3</span><span>Оборудование</span></button>
+            </div>
+
+            <form class="register-form" id="register-step-3-form" action="javascript:void(0)" method="post">
+              <label class="register-field"><span>Модель оборудования</span><input type="text" placeholder="Введите модель" /></label>
+              <label class="register-field"><span>Серийный номер</span><input type="text" placeholder="Введите серийный номер" /></label>
+              <div class="register-actions">
+                <a class="register-submit register-submit--secondary" href="./step-2.html">Назад</a>
+                <button class="register-submit" type="submit">Завершить регистрацию</button>
+              </div>
+            </form>
+          </div>
+          <div class="register-card__right" aria-hidden="true"><div class="register-illustration-wrap"><img src="../assets/forgot-password-illustration.svg" alt="" width="528" height="364" /></div></div>
+        </div>
+      </section>
+    </main>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

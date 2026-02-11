@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-  if (typeof initRegisterPage === 'function') {
-    initRegisterPage();
+  if (typeof initRegisterStepOnePage === 'function') {
+    initRegisterStepOnePage();
+  }
+
+  if (typeof initRegisterStepTwoPage === 'function') {
+    initRegisterStepTwoPage();
+  }
+
+  if (typeof initRegisterStepThreePage === 'function') {
+    initRegisterStepThreePage();
   }
 
   if (typeof initVerificationPage === 'function') {

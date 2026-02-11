@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация — Шаг 2</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.3/air-datepicker.css" />
+    <link rel="stylesheet" href="../css/register-page.css" />
+  </head>
+  <body>
+    <main class="register-layout">
+      <section class="register-card" aria-label="Регистрация, шаг 2">
+        <img class="register-logo" src="../assets/brand-logo.svg" alt="tuta" width="128" height="48" />
+        <div class="register-card__content">
+          <div class="register-card__left">
+            <a class="register-back" href="./step-1.html" aria-label="Вернуться назад">Назад</a>
+            <h1 class="register-title">Регистрация</h1>
+            <div class="register-steps" aria-label="Этапы регистрации">
+              <button class="register-step is-completed" type="button"><span class="register-step__index">1</span><span>Данные для входа</span></button>
+              <span class="register-step__line"></span>
+              <button class="register-step is-active" type="button"><span class="register-step__index">2</span><span>Персональные данные</span></button>
+              <span class="register-step__line"></span>
+              <button class="register-step" type="button" disabled><span class="register-step__index">3</span><span>Оборудование</span></button>
+            </div>
+
+            <form class="register-form" id="register-step-2-form" action="javascript:void(0)" method="post">
+              <label class="register-field"><span>ФИО</span><input type="text" placeholder="Иванов Иван Иванович" /></label>
+              <fieldset class="register-gender" aria-label="Пол">
+                <legend class="sr-only">Пол</legend>
+                <label class="register-gender__option">
+                  <input type="radio" name="gender" value="male" checked />
+                  <span>Мужской</span>
+                </label>
+                <label class="register-gender__option">
+                  <input type="radio" name="gender" value="female" />
+                  <span>Женский</span>
+                </label>
+              </fieldset>
+              <div class="register-grid register-grid--2">
+                <label class="register-field register-field--icon-help"><span>Идентификационный номер</span><input type="text" placeholder="12345678901AB2" /></label>
+                <label class="register-field register-field--icon-calendar"><span>Дата рождения</span><input id="reg-birth-date" type="text" placeholder="01 января 1991" /></label>
+              </div>
+              <div class="register-grid register-grid--3">
+                <label class="register-field"><span>Область</span><input type="text" placeholder="Гомельская" /></label>
+                <label class="register-field"><span>Район</span><input type="text" placeholder="Гомельский" /></label>
+                <label class="register-field"><span>Город</span><input type="text" placeholder="Гомель" /></label>
+              </div>
+              <div class="register-grid register-grid--2-addr">
+                <label class="register-field"><span>Почтовый индекс</span><input type="text" placeholder="1234567" /></label>
+                <label class="register-field"><span>Полный адрес</span><input type="text" placeholder="ул. К. Маркса, кв.724, подъезд 4" /></label>
+              </div>
+              <div class="register-actions">
+                <a class="register-submit register-submit--secondary" href="./step-1.html">Назад</a>
+                <button class="register-submit" type="submit">Продолжить</button>
+              </div>
+            </form>
+          </div>
+          <div class="register-card__right" aria-hidden="true"><div class="register-illustration-wrap"><img src="../assets/forgot-password-illustration.svg" alt="" width="528" height="364" /></div></div>
+        </div>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.3/air-datepicker.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

@@ -265,9 +265,16 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 .register-gender__option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 48px;
   border-radius: 14px;
   border: 2px solid #98a3bb;
@@ -275,9 +282,16 @@
   color: #1f2c4a;
   font-size: 16px;
   font-weight: 500;
+  cursor: pointer;
 }
 
-.register-gender__option.is-active {
+.register-gender__option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.register-gender__option:has(input:checked) {
   background: #d7e2f2;
   border-color: var(--line);
 }
@@ -320,6 +334,23 @@
 .register-field--icon-calendar::after {
   content: "\1F4C5";
   font-size: 15px;
+}
+
+.register-field--icon-calendar input[type='date'] {
+  padding-right: 10px;
+}
+
+.air-datepicker {
+  --adp-background-color: #ffffff;
+  --adp-border-color: #d8dfec;
+  --adp-color: #1f2c4a;
+  --adp-color-current-date: #162f63;
+  --adp-cell-background-color-selected: #162f63;
+  --adp-cell-background-color-selected-hover: #1f3d7d;
+  --adp-border-radius: 12px;
+  border-radius: 12px;
+  box-shadow: 0 14px 30px rgba(26, 44, 85, 0.16);
+  font-family: Manrope, "Segoe UI", sans-serif;
 }
 
 .register-login-link {
