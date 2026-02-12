@@ -7,31 +7,54 @@
     <link rel="stylesheet" href="../css/register-page.css" />
   </head>
   <body>
-    <main class="register-layout">
-      <section class="register-card" aria-label="Регистрация, шаг 3">
-        <img class="register-logo" src="../assets/brand-logo.svg" alt="tuta" width="128" height="48" />
-        <div class="register-card__content">
-          <div class="register-card__left">
-            <a class="register-back" href="./step-2.html" aria-label="Вернуться назад">Назад</a>
-            <h1 class="register-title">Регистрация</h1>
-            <div class="register-steps" aria-label="Этапы регистрации">
-              <button class="register-step is-completed" type="button"><span class="register-step__index">1</span><span>Данные для входа</span></button>
-              <span class="register-step__line"></span>
-              <button class="register-step is-completed" type="button"><span class="register-step__index">2</span><span>Персональные данные</span></button>
-              <span class="register-step__line"></span>
-              <button class="register-step is-active" type="button"><span class="register-step__index">3</span><span>Оборудование</span></button>
+    <main class="auth-layout">
+      <section class="auth-card" aria-label="Регистрация, шаг 3">
+        <img class="auth-logo" src="../assets/brand-logo.svg" alt="tuta" width="128" height="48" />
+        <div class="auth-card__content">
+          <div class="auth-card__left">
+            <a class="auth-back" href="./step-2.html" aria-label="Вернуться назад">Назад</a>
+            <h1 class="auth-title">Регистрация</h1>
+            <div class="auth-steps" aria-label="Этапы регистрации">
+              <button class="auth-step is-completed" type="button"><span class="auth-step__index">1</span><span>Данные для входа</span></button>
+              <span class="auth-step__line"></span>
+              <button class="auth-step is-completed" type="button"><span class="auth-step__index">2</span><span>Персональные данные</span></button>
+              <span class="auth-step__line"></span>
+              <button class="auth-step is-active" type="button"><span class="auth-step__index">3</span><span>Оборудование</span></button>
             </div>
 
-            <form class="register-form" id="register-step-3-form" action="javascript:void(0)" method="post">
-              <label class="register-field"><span>Модель оборудования</span><input type="text" placeholder="Введите модель" /></label>
-              <label class="register-field"><span>Серийный номер</span><input type="text" placeholder="Введите серийный номер" /></label>
-              <div class="register-actions">
-                <a class="register-submit register-submit--secondary" href="./step-2.html">Назад</a>
-                <button class="register-submit" type="submit">Завершить регистрацию</button>
+            <form class="auth-form" id="register-step-3-form" action="javascript:void(0)" method="post">
+              <fieldset class="auth-gender" aria-label="Наличие оборудования">
+                <legend class="sr-only">Наличие оборудования</legend>
+                <label class="auth-gender__option">
+                  <input type="radio" name="hasEquipment" value="yes" checked />
+                  <span>Есть оборудование</span>
+                </label>
+                <label class="auth-gender__option">
+                  <input type="radio" name="hasEquipment" value="no" />
+                  <span>Нет оборудования</span>
+                </label>
+              </fieldset>
+
+              <div id="equipment-fields" class="auth-grid">
+                <label class="auth-field"><span>Модель оборудования</span><input type="text" placeholder="Введите модель" /></label>
+                <label class="auth-field"><span>Серийный номер</span><input type="text" placeholder="Введите серийный номер" /></label>
+              </div>
+
+              <div id="no-equipment-fields" hidden>
+                <div class="auth-delivery-options">
+                  <label class="auth-check"><input type="radio" name="deliveryMethod" value="dealer" checked /><span>Получить у дилера</span></label>
+                  <label class="auth-check"><input type="radio" name="deliveryMethod" value="mail" /><span>Доставка почтой</span></label>
+                </div>
+                <p class="auth-alert-note"><img src="../assets/circle-alert.svg" alt="" width="16" height="16" /><span>Если у вас нет оборудования, выберите способ получения.</span></p>
+              </div>
+
+              <div class="auth-actions">
+                <a class="auth-submit auth-submit--secondary" href="./step-2.html">Назад</a>
+                <button class="auth-submit" type="submit">Завершить регистрацию</button>
               </div>
             </form>
           </div>
-          <div class="register-card__right" aria-hidden="true"><div class="register-illustration-wrap"><img src="../assets/forgot-password-illustration.svg" alt="" width="528" height="364" /></div></div>
+          <div class="auth-card__right" aria-hidden="true"><div class="auth-illustration-wrap"><img src="../assets/forgot-password-illustration.svg" alt="" width="528" height="364" /></div></div>
         </div>
       </section>
     </main>

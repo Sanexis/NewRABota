@@ -7,36 +7,36 @@
     <link rel="stylesheet" href="../css/register-page.css" />
   </head>
   <body>
-    <main class="register-layout">
-      <section class="register-card" aria-label="Регистрация, шаг 1">
-        <img class="register-logo" src="../assets/brand-logo.svg" alt="tuta" width="128" height="48" />
-        <div class="register-card__content">
-          <div class="register-card__left">
-            <a class="register-back" href="../index.html" aria-label="Вернуться назад">Назад</a>
-            <h1 class="register-title">Регистрация</h1>
-            <div class="register-steps" aria-label="Этапы регистрации">
-              <button class="register-step is-active" type="button"><span class="register-step__index">1</span><span>Данные для входа</span></button>
-              <span class="register-step__line"></span>
-              <button class="register-step" type="button" disabled><span class="register-step__index">2</span><span>Персональные данные</span></button>
-              <span class="register-step__line"></span>
-              <button class="register-step" type="button" disabled><span class="register-step__index">3</span><span>Оборудование</span></button>
+    <main class="auth-layout">
+      <section class="auth-card" aria-label="Регистрация, шаг 1">
+        <img class="auth-logo" src="../assets/brand-logo.svg" alt="tuta" width="128" height="48" />
+        <div class="auth-card__content">
+          <div class="auth-card__left">
+            <a class="auth-back" href="../index.html" aria-label="Вернуться назад">Назад</a>
+            <h1 class="auth-title">Регистрация</h1>
+            <div class="auth-steps" aria-label="Этапы регистрации">
+              <button class="auth-step is-active" type="button"><span class="auth-step__index">1</span><span>Данные для входа</span></button>
+              <span class="auth-step__line"></span>
+              <button class="auth-step" type="button" disabled><span class="auth-step__index">2</span><span>Персональные данные</span></button>
+              <span class="auth-step__line"></span>
+              <button class="auth-step" type="button" disabled><span class="auth-step__index">3</span><span>Оборудование</span></button>
             </div>
 
-            <form class="register-form" id="register-step-1-form" action="javascript:void(0)" method="post">
-              <label class="register-field"><span>Email</span><input id="reg-email" type="email" placeholder="tuta@gmail.com" /></label>
-              <label class="register-check register-check--top"><input type="radio" name="registerLoginType" value="email" checked /><span>Выбрать email в качестве логина</span></label>
-              <label class="register-field"><span>Номер телефона</span><input id="reg-phone" type="tel" placeholder="+375 (29) 111-11-11" /></label>
-              <label class="register-check register-check--top"><input type="radio" name="registerLoginType" value="phone" /><span>Выбрать номер телефона в качестве логина</span></label>
-              <label class="register-field register-field--password"><span>Придумайте пароль</span><input id="reg-password" type="password" placeholder="7789BM6X@@H&$K_" /><button class="password-visibility" type="button" data-toggle-target="reg-password" aria-label="Показать пароль"></button></label>
-              <label class="register-field register-field--password"><span>Повторите пароль</span><input id="reg-password-repeat" type="password" placeholder="7789BM6X@@H&$K_" /><button class="password-visibility" type="button" data-toggle-target="reg-password-repeat" aria-label="Показать пароль"></button></label>
-              <label class="register-check"><input type="checkbox" data-required-consent="true" /><span>Я согласен с <a href="#">Политикой обработки персональных данных</a> <em>*</em></span></label>
-              <label class="register-check"><input type="checkbox" data-required-consent="true" /><span>Я согласен с <a href="#">Правилом оказания услуг</a> <em>*</em></span></label>
-              <label class="register-check"><input type="checkbox" data-required-consent="true" /><span>Ознакомлен с <a href="#">Договором оферты</a> <em>*</em></span></label>
-              <button class="register-submit" type="submit">Продолжить</button>
+            <form class="auth-form" id="register-step-1-form" action="javascript:void(0)" method="post">
+              <label class="auth-field"><span>Email</span><input id="reg-email" type="email" placeholder="tuta@gmail.com" /></label>
+              <label class="auth-check auth-check--top"><input type="radio" name="registerLoginType" value="email" checked /><span>Выбрать email в качестве логина</span></label>
+              <label class="auth-field"><span>Номер телефона</span><input id="reg-phone" type="tel" placeholder="+375 (29) 111-11-11" /></label>
+              <label class="auth-check auth-check--top"><input type="radio" name="registerLoginType" value="phone" /><span>Выбрать номер телефона в качестве логина</span></label>
+              <label class="auth-field auth-field--password"><span>Придумайте пароль</span><input id="reg-password" type="password" placeholder="7789BM6X@@H&$K_" /><button class="password-visibility" type="button" data-toggle-target="reg-password" aria-label="Показать пароль"></button></label>
+              <label class="auth-field auth-field--password"><span>Повторите пароль</span><input id="reg-password-repeat" type="password" placeholder="7789BM6X@@H&$K_" /><button class="password-visibility" type="button" data-toggle-target="reg-password-repeat" aria-label="Показать пароль"></button></label>
+              <label class="auth-check"><input type="checkbox" data-required-consent="true" /><span>Я согласен с <a href="#">Политикой обработки персональных данных</a> <em>*</em></span></label>
+              <label class="auth-check"><input type="checkbox" data-required-consent="true" /><span>Я согласен с <a href="#">Правилом оказания услуг</a> <em>*</em></span></label>
+              <label class="auth-check"><input type="checkbox" data-required-consent="true" /><span>Ознакомлен с <a href="#">Договором оферты</a> <em>*</em></span></label>
+              <button class="auth-submit" type="submit">Продолжить</button>
             </form>
-            <p class="register-login-link">Есть аккаунт? <a href="../login.html">Авторизация</a></p>
+            <p class="auth-login-link">Есть аккаунт? <a href="../login.html">Авторизация</a></p>
           </div>
-          <div class="register-card__right" aria-hidden="true"><div class="register-illustration-wrap"><img src="../assets/forgot-password-illustration.svg" alt="" width="528" height="364" /></div></div>
+          <div class="auth-card__right" aria-hidden="true"><div class="auth-illustration-wrap"><img src="../assets/forgot-password-illustration.svg" alt="" width="528" height="364" /></div></div>
         </div>
       </section>
     </main>

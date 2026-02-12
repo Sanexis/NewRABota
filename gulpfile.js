@@ -19,6 +19,7 @@ const paths = {
   },
   styles: {
     src: ['src/styles/**/*.scss', '!src/styles/**/_*.scss'],
+    watch: 'src/styles/**/*.scss',
     dest: 'dist/css/'
   },
   scripts: {
@@ -83,7 +84,7 @@ function serve(done) {
   });
 
   watch(paths.html.src, html);
-  watch(paths.styles.src, styles);
+  watch(paths.styles.watch, styles);
   watch(paths.scripts.src, scripts);
   watch(paths.assets.src, assets);
 

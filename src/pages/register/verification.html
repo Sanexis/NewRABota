@@ -7,38 +7,38 @@
     <link rel="stylesheet" href="../css/verification-page.css" />
   </head>
   <body>
-    <main class="verification-layout">
-      <section class="verification-card" aria-label="Форма верификации">
-        <img class="verification-logo" src="../assets/brand-logo.svg" alt="tuta" width="128" height="48" />
+    <main class="auth-layout">
+      <section class="auth-card" aria-label="Форма верификации">
+        <img class="auth-logo" src="../assets/brand-logo.svg" alt="tuta" width="128" height="48" />
 
-        <div class="verification-card__content">
-          <div class="verification-card__left">
-            <a class="verification-back" href="./step-3.html" aria-label="Вернуться назад">Назад</a>
-            <h1 class="verification-title">Верификация</h1>
-            <p class="verification-subtitle" id="verification-description">
+        <div class="auth-card__content">
+          <div class="auth-card__left">
+            <a class="auth-back" href="./step-1.html" aria-label="Вернуться назад">Назад</a>
+            <h1 class="auth-title">Верификация</h1>
+            <p class="auth-subtitle" id="verification-description">
               На Вашу почту отправлено письмо с кодом для подтверждения email. Введите полученный код в поле ниже и нажмите кнопку "Подтвердить".
             </p>
 
-            <form class="verification-form" action="javascript:void(0)" method="post">
-              <label class="verification-field">
+            <form class="auth-form" action="javascript:void(0)" method="post">
+              <label class="auth-field">
                 <span>Введите полученный код</span>
                 <input id="verification-code" type="text" placeholder="123456" inputmode="numeric" />
               </label>
 
-              <div class="verification-actions">
-                <button class="verification-btn verification-btn--light" type="button">Отправить письмо повторно</button>
-                <button class="verification-btn" type="submit">Продолжить</button>
+              <div class="auth-actions">
+                <button class="auth-btn auth-btn--light" type="button">Отправить письмо повторно</button>
+                <button class="auth-btn" type="submit">Продолжить</button>
               </div>
             </form>
 
-            <p class="verification-login-link">
+            <p class="auth-login-link">
               Есть аккаунт?
               <a href="../login.html">Авторизация</a>
             </p>
           </div>
 
-          <div class="verification-card__right" aria-hidden="true">
-            <div class="verification-illustration-wrap">
+          <div class="auth-card__right" aria-hidden="true">
+            <div class="auth-illustration-wrap">
               <img src="../assets/forgot-password-illustration.svg" alt="" width="528" height="364" />
             </div>
           </div>

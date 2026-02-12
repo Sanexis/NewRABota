@@ -10,19 +10,19 @@ function initRegisterStepOnePage() {
   const toggleButtons = form.querySelectorAll('.password-visibility[data-toggle-target]');
 
   const showFieldError = (field, message) => {
-    field.classList.add('register-field--error');
-    let errorNode = field.querySelector('.register-field__error');
+    field.classList.add('auth-field--error');
+    let errorNode = field.querySelector('.auth-field__error');
     if (!errorNode) {
       errorNode = document.createElement('p');
-      errorNode.className = 'register-field__error';
+      errorNode.className = 'auth-field__error';
       field.appendChild(errorNode);
     }
     errorNode.textContent = message;
   };
 
   const clearFieldError = (field) => {
-    field.classList.remove('register-field--error');
-    const errorNode = field.querySelector('.register-field__error');
+    field.classList.remove('auth-field--error');
+    const errorNode = field.querySelector('.auth-field__error');
     if (errorNode) errorNode.remove();
   };
 
@@ -39,17 +39,17 @@ function initRegisterStepOnePage() {
     });
   });
 
-  form.querySelectorAll('.register-field input').forEach((input) => {
+  form.querySelectorAll('.auth-field input').forEach((input) => {
     input.addEventListener('input', () => {
-      const field = input.closest('.register-field');
+      const field = input.closest('.auth-field');
       if (field) clearFieldError(field);
     });
   });
 
   consentCheckboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
-      const wrap = checkbox.closest('.register-check');
-      if (wrap) wrap.classList.remove('register-check--error');
+      const wrap = checkbox.closest('.auth-check');
+      if (wrap) wrap.classList.remove('auth-check--error');
     });
   });
 
@@ -57,27 +57,27 @@ function initRegisterStepOnePage() {
     event.preventDefault();
     let valid = true;
 
-    form.querySelectorAll('.register-field').forEach((field) => clearFieldError(field));
-    form.querySelectorAll('.register-check').forEach((check) => check.classList.remove('register-check--error'));
+    form.querySelectorAll('.auth-field').forEach((field) => clearFieldError(field));
+    form.querySelectorAll('.auth-check').forEach((check) => check.classList.remove('auth-check--error'));
 
     [emailInput, phoneInput, passwordInput, repeatInput].forEach((input) => {
       if (!input || !input.value.trim()) {
-        const field = input ? input.closest('.register-field') : null;
+        const field = input ? input.closest('.auth-field') : null;
         if (field) showFieldError(field, 'Заполните поле');
         valid = false;
       }
     });
 
     if (passwordInput && repeatInput && passwordInput.value && repeatInput.value && passwordInput.value !== repeatInput.value) {
-      const repeatField = repeatInput.closest('.register-field');
+      const repeatField = repeatInput.closest('.auth-field');
       if (repeatField) showFieldError(repeatField, 'Пароли не совпадают');
       valid = false;
     }
 
     consentCheckboxes.forEach((checkbox) => {
       if (!checkbox.checked) {
-        const wrap = checkbox.closest('.register-check');
-        if (wrap) wrap.classList.add('register-check--error');
+        const wrap = checkbox.closest('.auth-check');
+        if (wrap) wrap.classList.add('auth-check--error');
         valid = false;
       }
     });
@@ -86,6 +86,14 @@ function initRegisterStepOnePage() {
 
     sessionStorage.setItem('register_email', emailInput.value.trim());
     await fakeAjax();
-    window.location.href = './step-2.html';
+    const verificationUrl = new URL('./verification.html', window.location.href);
+    verificationUrl.searchParams.set('email', emailInput.value.trim());
+
+    if (typeof window.navigateRegisterAjax === 'function') {
+      window.navigateRegisterAjax(verificationUrl.toString());
+      return;
+    }
+
+    window.location.href = verificationUrl.toString();
   });
 }

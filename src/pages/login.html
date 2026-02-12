@@ -7,40 +7,40 @@
     <link rel="stylesheet" href="./css/login-page.css" />
   </head>
   <body>
-    <main class="login-layout">
-      <section class="login-card" aria-label="Форма авторизации">
-        <img class="login-logo" src="./assets/brand-logo.svg" alt="tuta" width="128" height="48" />
+    <main class="auth-layout">
+      <section class="auth-card" aria-label="Форма авторизации">
+        <img class="auth-logo" src="./assets/brand-logo.svg" alt="tuta" width="128" height="48" />
 
-        <div class="login-card__content">
-          <div class="login-card__left">
-            <h1 class="login-title">Авторизация</h1>
-            <p class="login-subtitle">Введите логин и пароль для входа в личный кабинет</p>
+        <div class="auth-card__content">
+          <div class="auth-card__left">
+            <h1 class="auth-title">Авторизация</h1>
+            <p class="auth-subtitle">Введите логин и пароль для входа в личный кабинет</p>
 
-            <form class="login-form" action="javascript:void(0)" method="post">
-              <fieldset class="login-methods">
+            <form class="auth-form" action="javascript:void(0)" method="post">
+              <fieldset class="auth-methods">
                 <legend class="sr-only">Способ входа</legend>
-                <label class="login-radio">
+                <label class="auth-radio">
                   <input type="radio" name="authMethod" value="email" checked />
                   <span>Email</span>
                 </label>
-                <label class="login-radio">
+                <label class="auth-radio">
                   <input type="radio" name="authMethod" value="phone" />
                   <span>Номер телефона</span>
                 </label>
               </fieldset>
 
-              <label class="login-field">
-                <span id="login-label">Логин</span>
+              <label class="auth-field">
+                <span class="login-label">Логин</span>
                 <input id="login-input" type="email" name="login" placeholder="tuta@gmail.com" autocomplete="email" />
               </label>
 
-              <label class="login-field login-field--password">
+              <label class="auth-field auth-field--password">
                 <span>Пароль</span>
                 <input id="login-password" type="password" name="password" placeholder="••••••••••••••••" autocomplete="current-password" />
                 <button class="password-visibility" type="button" data-toggle-target="login-password" aria-label="Показать пароль"></button>
               </label>
 
-              <div class="login-extra">
+              <div class="auth-extra">
                 <label class="remember-check">
                   <input type="checkbox" name="remember" checked />
                   <span>Запомнить меня</span>
@@ -48,17 +48,17 @@
                 <a class="forgot-link" href="./forgot-password.html">Забыли пароль?</a>
               </div>
 
-              <button class="login-submit" type="submit">Войти</button>
+              <button class="auth-submit" type="submit">Войти</button>
             </form>
 
-            <p class="login-register">
+            <p class="auth-register">
               Нет аккаунта?
               <a href="#">Регистрация</a>
             </p>
           </div>
 
-          <div class="login-card__right" aria-hidden="true">
-            <div class="login-illustration-wrap">
+          <div class="auth-card__right" aria-hidden="true">
+            <div class="auth-illustration-wrap">
               <img src="./assets/login-illustration.svg" alt="" width="528" height="364" />
             </div>
           </div>

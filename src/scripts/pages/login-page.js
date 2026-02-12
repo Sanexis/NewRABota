@@ -7,7 +7,7 @@ function initLoginPage() {
 
   const methodInputs = loginForm.querySelectorAll('input[name="authMethod"]');
   const loginInput = loginForm.querySelector('#login-input');
-  const loginLabel = loginForm.querySelector('#login-label');
+  const loginLabel = loginForm.querySelector('.login-label');
   const passwordInput = loginForm.querySelector('#login-password');
   const loginField = loginInput ? loginInput.closest('.login-field') : null;
   const passwordField = loginForm.querySelector('.login-field--password');

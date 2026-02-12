@@ -3,6 +3,16 @@ function initRegisterStepTwoPage() {
   if (!form) return;
 
   const birthDateInput = form.querySelector('#reg-birth-date');
+  const idNumberInput = form.querySelector('#reg-id-number');
+
+  if (idNumberInput) {
+    const sanitizeIdNumber = () => {
+      idNumberInput.value = idNumberInput.value.replace(/\D/g, '').slice(0, 14);
+    };
+
+    sanitizeIdNumber();
+    idNumberInput.addEventListener('input', sanitizeIdNumber);
+  }
 
   if (birthDateInput && typeof AirDatepicker === 'function') {
     const ruLocale = {
@@ -35,25 +45,25 @@ function initRegisterStepTwoPage() {
   const fakeAjax = () => new Promise((resolve) => setTimeout(resolve, 350));
 
   const showFieldError = (field, message) => {
-    field.classList.add('register-field--error');
-    let errorNode = field.querySelector('.register-field__error');
+    field.classList.add('auth-field--error');
+    let errorNode = field.querySelector('.auth-field__error');
     if (!errorNode) {
       errorNode = document.createElement('p');
-      errorNode.className = 'register-field__error';
+      errorNode.className = 'auth-field__error';
       field.appendChild(errorNode);
     }
     errorNode.textContent = message;
   };
 
   const clearFieldError = (field) => {
-    field.classList.remove('register-field--error');
-    const errorNode = field.querySelector('.register-field__error');
+    field.classList.remove('auth-field--error');
+    const errorNode = field.querySelector('.auth-field__error');
     if (errorNode) errorNode.remove();
   };
 
-  form.querySelectorAll('.register-field input').forEach((input) => {
+  form.querySelectorAll('.auth-field input').forEach((input) => {
     input.addEventListener('input', () => {
-      const field = input.closest('.register-field');
+      const field = input.closest('.auth-field');
       if (field) clearFieldError(field);
     });
   });
@@ -62,10 +72,10 @@ function initRegisterStepTwoPage() {
     event.preventDefault();
     let valid = true;
 
-    form.querySelectorAll('.register-field').forEach((field) => clearFieldError(field));
-    form.querySelectorAll('.register-field input').forEach((input) => {
+    form.querySelectorAll('.auth-field').forEach((field) => clearFieldError(field));
+    form.querySelectorAll('.auth-field input').forEach((input) => {
       if (!input.value.trim()) {
-        const field = input.closest('.register-field');
+        const field = input.closest('.auth-field');
         if (field) showFieldError(field, 'Заполните поле');
         valid = false;
       }
@@ -74,6 +84,11 @@ function initRegisterStepTwoPage() {
     if (!valid) return;
 
     await fakeAjax();
+    if (typeof window.navigateRegisterAjax === 'function') {
+      window.navigateRegisterAjax('./step-3.html');
+      return;
+    }
+
     window.location.href = './step-3.html';
   });
 }
