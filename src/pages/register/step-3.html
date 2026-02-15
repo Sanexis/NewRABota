@@ -35,11 +35,12 @@
                 </label>
               </fieldset>
 
-              <div id="equipment-fields" class="auth-grid">
+              <div id="equipment-fields" class="auth-grid auth-grid--equipment">
                 <label class="auth-field auth-field--icon-help">
                   <span class="auth-field__label-with-hint">
                     Номер карты доступа
                     <button class="auth-field__hint-trigger" type="button" data-hint-target="equipment-data-hint" aria-label="Подсказка по номеру карты доступа"></button>
+                    <span class="auth-field__hint">Номер должен состоять из 14 цифр</span>
                   </span>
                   <input id="access-card-number" type="text" placeholder="1234 5678 1234 5678" maxlength="19" inputmode="numeric" />
                 </label>

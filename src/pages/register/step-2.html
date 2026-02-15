@@ -38,17 +38,18 @@
               </fieldset>
               <div class="auth-grid auth-grid--2">
                 <label class="auth-field auth-field--icon-help">
-                  <span>Идентификационный номер</span>
-                  <button class="auth-field__hint-trigger" type="button" aria-label="Подсказка по идентификационному номеру"></button>
-                  <div class="auth-field__hint">Номер должен состоять из 14 символов, цифры и латиницы</div>
+                  <span class="auth-field__label-with-hint">Идентификационный номер <button class="auth-field__hint-trigger" type="button" aria-label="Подсказка по идентификационному номеру"></button><span class="auth-field__hint">Номер должен состоять из 14 символов, цифры и латиницы</span></span>
                   <input id="reg-id-number" type="text" placeholder="12345678901AB2" maxlength="14" inputmode="numeric" />
                 </label>
                 <label class="auth-field auth-field--icon-calendar"><span>Дата рождения</span><input id="reg-birth-date" type="text" placeholder="01 января 1991" /></label>
               </div>
               <div class="auth-grid auth-grid--3">
-                <label class="auth-field"><span>Область</span><input id="reg-region" type="text" placeholder="Гомельская" /></label>
-                <label class="auth-field"><span>Район</span><input id="reg-district" type="text" placeholder="Гомельский" /></label>
-                <label class="auth-field"><span>Город</span><input id="reg-city" type="text" placeholder="Гомель" /></label>
+                <label class="auth-field"><span>Область</span><input id="reg-region" type="text" placeholder="Гомельская" list="region-options" autocomplete="off" /></label>
+                <datalist id="region-options"></datalist>
+                <label class="auth-field"><span>Район</span><input id="reg-district" type="text" placeholder="Гомельский" list="district-options" autocomplete="off" /></label>
+                <datalist id="district-options"></datalist>
+                <label class="auth-field"><span>Город</span><input id="reg-city" type="text" placeholder="Гомель" list="city-options" autocomplete="off" /></label>
+                <datalist id="city-options"></datalist>
               </div>
               <div class="auth-grid auth-grid--2-addr">
                 <label class="auth-field"><span>Почтовый индекс</span><input id="reg-postcode" type="text" placeholder="1234567" /></label>

@@ -12,6 +12,7 @@ function initRegisterStepTwoPage() {
   const fullAddressInput = form.querySelector('#reg-full-address');
   const profileData = typeof window.getRegisterFormData === 'function' ? window.getRegisterFormData() : {};
 
+
   const ensureAirDatepickerAssets = async () => {
     if (typeof AirDatepicker === 'function') {
       return;
@@ -51,6 +52,7 @@ function initRegisterStepTwoPage() {
     if (genderInput) genderInput.checked = true;
   }
 
+
   if (idNumberInput) {
     const sanitizeIdNumber = () => {
       idNumberInput.value = idNumberInput.value
@@ -62,6 +64,36 @@ function initRegisterStepTwoPage() {
     sanitizeIdNumber();
     idNumberInput.addEventListener('input', sanitizeIdNumber);
   }
+
+  const idHintField = form.querySelector('.auth-field--icon-help');
+  const idHintLabel = idHintField ? idHintField.querySelector('.auth-field__label-with-hint') : null;
+  const idHintTrigger = idHintField ? idHintField.querySelector('.auth-field__hint-trigger') : null;
+  const idHint = idHintField ? idHintField.querySelector('.auth-field__hint') : null;
+
+  const positionIdHint = () => {
+    if (!idHintLabel || !idHintTrigger || !idHint) {
+      return;
+    }
+
+    const labelRect = idHintLabel.getBoundingClientRect();
+    const triggerRect = idHintTrigger.getBoundingClientRect();
+    const hintWidth = idHint.offsetWidth || 232;
+    const triggerCenterInLabel = triggerRect.left - labelRect.left + triggerRect.width / 2;
+    const hintLeft = triggerCenterInLabel - hintWidth / 2;
+    const arrowLeft = hintWidth / 2 - 6;
+
+    idHint.style.setProperty('--hint-left', `${Math.round(hintLeft)}px`);
+    idHint.style.setProperty('--hint-arrow-left', `${Math.round(arrowLeft)}px`);
+  };
+
+  if (idHintTrigger) {
+    idHintTrigger.addEventListener('mouseenter', positionIdHint);
+    idHintTrigger.addEventListener('focus', positionIdHint);
+    idHintTrigger.addEventListener('click', positionIdHint);
+  }
+
+  window.addEventListener('resize', positionIdHint);
+  setTimeout(positionIdHint, 0);
 
   const initDatepicker = () => {
     if (!birthDateInput || typeof AirDatepicker !== 'function') {

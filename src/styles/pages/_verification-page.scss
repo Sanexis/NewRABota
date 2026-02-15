@@ -1,5 +1,15 @@
 @use "forgot-password";
 
+@media (max-width: 1250px) {
+  .auth-card__content {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-card__left {
+    padding-left: 0;
+  }
+}
+
 .auth-card__left {
   padding-top: 96px;
 }

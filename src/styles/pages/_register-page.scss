@@ -5,6 +5,15 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 18px;
+  overflow: scroll;
+  contain: inline-size;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.auth-steps::-webkit-scrollbar {
+  display: none;
 }
 
 .auth-step {
@@ -67,9 +76,12 @@
 }
 
 .auth-step__line {
-  width: 18px;
+  width: 16px;
+  min-width: 16px;
+  flex: 0 0 16px;
+  display: block;
   height: 1px;
-  background: #a6adbf;
+  background: #848ca2;
 }
 
 .auth-field {
@@ -253,6 +265,10 @@
   gap: 12px;
 }
 
+.auth-grid--equipment {
+  gap: 28px;
+}
+
 .auth-grid--2 {
   grid-template-columns: 1fr 1fr;
 }
@@ -365,6 +381,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  position: relative;
 }
 
 .auth-field__label-with-hint .auth-field__hint-trigger {
@@ -372,6 +389,22 @@
   width: 16px;
   height: 16px;
   background-size: 14px 14px;
+}
+
+.auth-field__label-with-hint .auth-field__hint {
+  top: auto;
+  bottom: calc(100% + 8px);
+  right: auto;
+  left: var(--hint-left, 0px);
+  width: 232px;
+  min-width: 232px;
+  max-width: 232px;
+  height: 60px;
+}
+
+.auth-field__label-with-hint .auth-field__hint::after {
+  right: auto;
+  left: var(--hint-arrow-left, 108px);
 }
 
 .auth-field--icon-calendar input[type='date'] {
@@ -410,7 +443,7 @@
   position: relative;
   display: grid;
   gap: 6px;
-  padding: 14px 16px 14px 42px;
+  padding: 14px 12px 14px 42px;
   border: 1px solid #142954;
   border-radius: 16px;
   background: #fff;
@@ -427,7 +460,7 @@
 }
 
 .auth-dealer-card__title {
-  font-size: 30px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.1;
   color: #0a1121;
@@ -484,8 +517,21 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 14px 12px;
+  border: 1px solid #d21111;
+  border-radius: 16px;
   color: #2b3550;
   font-size: 13px;
+}
+
+@media (max-width: 1362px) {
+  .auth-card__content {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-card__left {
+    padding-left: 0;
+  }
 }
 
 .is-hidden {
@@ -493,6 +539,12 @@
 }
 
 @media (max-width: 525px) {
+  .auth-grid--2,
+  .auth-grid--3,
+  .auth-grid--2-addr {
+    grid-template-columns: 1fr;
+  }
+
   .auth-gender--equipment {
     grid-template-columns: 1fr;
   }

@@ -8,6 +8,7 @@ function initRegisterStepThreePage() {
   const accessCardInput = form.querySelector('#access-card-number');
   const moduleSerialInput = form.querySelector('#module-serial-number');
   const hintTriggers = form.querySelectorAll('.auth-field__hint-trigger');
+  const equipmentDataHint = form.querySelector('#equipment-data-hint');
   const submitButton = form.querySelector('button[type="submit"]');
   const deliveryInputs = form.querySelectorAll('input[name="deliveryMethod"]');
   const savedData = typeof window.getRegisterFormData === 'function' ? window.getRegisterFormData() : {};
@@ -69,6 +70,29 @@ function initRegisterStepThreePage() {
     if (submitButton) {
       submitButton.textContent = hasEquipment ? 'Завершить регистрацию' : 'Продолжить';
     }
+
+    if (!hasEquipment && equipmentDataHint) {
+      equipmentDataHint.classList.add('is-hidden');
+    }
+  };
+
+  const updateEquipmentHintVisibility = () => {
+    if (!equipmentDataHint) {
+      return;
+    }
+
+    const hasEquipment = getEquipmentMode() === 'yes';
+    if (!hasEquipment) {
+      equipmentDataHint.classList.add('is-hidden');
+      return;
+    }
+
+    const hasText = Boolean(
+      (accessCardInput && accessCardInput.value.trim()) ||
+      (moduleSerialInput && moduleSerialInput.value.trim())
+    );
+
+    equipmentDataHint.classList.toggle('is-hidden', !hasText);
   };
 
   hasEquipmentInputs.forEach((input) => {
@@ -85,7 +109,14 @@ function initRegisterStepThreePage() {
     };
 
     applyCardMask();
-    accessCardInput.addEventListener('input', applyCardMask);
+    accessCardInput.addEventListener('input', () => {
+      applyCardMask();
+      updateEquipmentHintVisibility();
+    });
+  }
+
+  if (moduleSerialInput) {
+    moduleSerialInput.addEventListener('input', updateEquipmentHintVisibility);
   }
 
   hintTriggers.forEach((trigger) => {
@@ -113,6 +144,8 @@ function initRegisterStepThreePage() {
       });
     }
   });
+
+  updateEquipmentHintVisibility();
 
   form.querySelectorAll('.auth-field input').forEach((input) => {
     input.addEventListener('input', () => {
