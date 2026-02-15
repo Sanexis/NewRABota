@@ -539,6 +539,10 @@
 }
 
 @media (max-width: 525px) {
+  .auth-grid {
+    gap: 20px;
+  }
+
   .auth-grid--2,
   .auth-grid--3,
   .auth-grid--2-addr {
