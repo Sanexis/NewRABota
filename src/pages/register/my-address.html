@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация — Доставка по почте на мой адрес</title>
+    <link rel="stylesheet" href="../css/register-page.css" />
+  </head>
+  <body>
+    <main class="auth-layout">
+      <section class="auth-card" aria-label="Регистрация, доставка по адресу">
+        <img class="auth-logo" src="../assets/brand-logo.svg" alt="tuta" width="128" height="48" />
+        <div class="auth-card__content">
+          <div class="auth-card__left">
+            <a class="auth-back" href="./step-3.html" aria-label="Вернуться назад">Назад</a>
+            <h1 class="auth-title">Доставка по почте на мой адрес</h1>
+            <p class="auth-subtitle">После модерации вашей заявки мы отправим оборудование по указанному адресу. Отслеживание посылки будет доступно в вашем личном кабинете.</p>
+
+            <form class="auth-form" id="register-my-address-form" action="javascript:void(0)" method="post">
+              <div class="auth-address-card">
+                <p class="auth-address-card__caption">Оборудование будет отправлено на ваш адрес:</p>
+                <p id="register-delivery-address" class="auth-address-card__value">Адрес не найден. Вернитесь на шаг 2 и заполните адрес.</p>
+                <a class="auth-address-card__edit" href="./step-2.html">Изменить адрес</a>
+              </div>
+
+              <button class="auth-submit" type="submit">Завершить регистрацию</button>
+            </form>
+
+            <p class="auth-login-link">Есть аккаунт? <a href="../login.html">Авторизация</a></p>
+          </div>
+
+          <div class="auth-card__right" aria-hidden="true">
+            <div class="auth-illustration-wrap">
+              <img src="../assets/forgot-password-illustration.svg" alt="" width="528" height="364" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

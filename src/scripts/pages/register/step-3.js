@@ -5,6 +5,32 @@ function initRegisterStepThreePage() {
   const hasEquipmentInputs = form.querySelectorAll('input[name="hasEquipment"]');
   const equipmentFieldsBlock = form.querySelector('#equipment-fields');
   const noEquipmentFieldsBlock = form.querySelector('#no-equipment-fields');
+  const accessCardInput = form.querySelector('#access-card-number');
+  const moduleSerialInput = form.querySelector('#module-serial-number');
+  const hintTriggers = form.querySelectorAll('.auth-field__hint-trigger');
+  const submitButton = form.querySelector('button[type="submit"]');
+  const deliveryInputs = form.querySelectorAll('input[name="deliveryMethod"]');
+  const savedData = typeof window.getRegisterFormData === 'function' ? window.getRegisterFormData() : {};
+
+  if (savedData.hasEquipment && hasEquipmentInputs.length) {
+    hasEquipmentInputs.forEach((input) => {
+      input.checked = input.value === savedData.hasEquipment;
+    });
+  }
+
+  if (accessCardInput && savedData.accessCardNumber) {
+    accessCardInput.value = savedData.accessCardNumber;
+  }
+
+  if (moduleSerialInput && savedData.moduleSerialNumber) {
+    moduleSerialInput.value = savedData.moduleSerialNumber;
+  }
+
+  if (savedData.deliveryMethod && deliveryInputs.length) {
+    deliveryInputs.forEach((input) => {
+      input.checked = input.value === savedData.deliveryMethod;
+    });
+  }
 
   const fakeAjax = () => new Promise((resolve) => setTimeout(resolve, 350));
 
@@ -32,8 +58,17 @@ function initRegisterStepThreePage() {
 
   const toggleEquipmentBlocks = () => {
     const hasEquipment = getEquipmentMode() === 'yes';
-    if (equipmentFieldsBlock) equipmentFieldsBlock.hidden = !hasEquipment;
-    if (noEquipmentFieldsBlock) noEquipmentFieldsBlock.hidden = hasEquipment;
+    if (equipmentFieldsBlock) {
+      equipmentFieldsBlock.classList.toggle('is-hidden', !hasEquipment);
+    }
+
+    if (noEquipmentFieldsBlock) {
+      noEquipmentFieldsBlock.classList.toggle('is-hidden', hasEquipment);
+    }
+
+    if (submitButton) {
+      submitButton.textContent = hasEquipment ? 'Завершить регистрацию' : 'Продолжить';
+    }
   };
 
   hasEquipmentInputs.forEach((input) => {
@@ -41,6 +76,43 @@ function initRegisterStepThreePage() {
   });
 
   toggleEquipmentBlocks();
+
+  if (accessCardInput) {
+    const applyCardMask = () => {
+      const digits = accessCardInput.value.replace(/\D/g, '').slice(0, 16);
+      const groups = digits.match(/.{1,4}/g) || [];
+      accessCardInput.value = groups.join(' ');
+    };
+
+    applyCardMask();
+    accessCardInput.addEventListener('input', applyCardMask);
+  }
+
+  hintTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      const hintId = trigger.getAttribute('data-hint-target');
+      const hintNode = hintId ? form.querySelector(`#${hintId}`) : null;
+      if (!hintNode) return;
+
+      const willShow = hintNode.classList.contains('is-hidden');
+      form.querySelectorAll('.auth-alert-note').forEach((note) => {
+        note.classList.add('is-hidden');
+      });
+
+      if (willShow) {
+        hintNode.classList.remove('is-hidden');
+      }
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.auth-field__hint-trigger')) {
+      form.querySelectorAll('.auth-alert-note').forEach((note) => {
+        note.classList.add('is-hidden');
+      });
+    }
+  });
 
   form.querySelectorAll('.auth-field input').forEach((input) => {
     input.addEventListener('input', () => {
@@ -69,13 +141,37 @@ function initRegisterStepThreePage() {
     if (!valid) return;
 
     await fakeAjax();
-    const completeUrl = new URL('../success.html', window.location.href);
+    const equipmentMode = getEquipmentMode();
+    let nextUrl;
+
+    const deliveryInput = form.querySelector('input[name="deliveryMethod"]:checked');
+    const deliveryMethod = deliveryInput ? deliveryInput.value : 'dealer';
+
+    if (typeof window.registerAjaxSaveDraft === 'function') {
+      await window.registerAjaxSaveDraft({
+        hasEquipment: equipmentMode,
+        accessCardNumber: accessCardInput ? accessCardInput.value.trim() : '',
+        moduleSerialNumber: moduleSerialInput ? moduleSerialInput.value.trim() : '',
+        deliveryMethod
+      });
+    }
+
+    if (equipmentMode === 'yes') {
+      if (typeof window.completeRegisterFlow === 'function') {
+        window.completeRegisterFlow({ registrationResult: 'completed_with_equipment' });
+      }
+      return;
+    } else {
+      nextUrl = deliveryMethod === 'dealer'
+        ? new URL('./dealer.html', window.location.href)
+        : new URL('./my-address.html', window.location.href);
+    }
 
     if (typeof window.navigateRegisterAjax === 'function') {
-      window.navigateRegisterAjax(completeUrl.toString());
+      window.navigateRegisterAjax(nextUrl.toString());
       return;
     }
 
-    window.location.href = completeUrl.toString();
+    window.location.href = nextUrl.toString();
   });
 }

@@ -6,8 +6,53 @@ function initRegisterStepOnePage() {
   const phoneInput = form.querySelector('#reg-phone');
   const passwordInput = form.querySelector('#reg-password');
   const repeatInput = form.querySelector('#reg-password-repeat');
+  const loginTypeInputs = form.querySelectorAll('input[name="registerLoginType"]');
   const consentCheckboxes = form.querySelectorAll('input[data-required-consent="true"]');
   const toggleButtons = form.querySelectorAll('.password-visibility[data-toggle-target]');
+
+  const formatBelarusPhone = (digits) => {
+    const d = digits.slice(0, 9);
+    const p1 = d.slice(0, 2);
+    const p2 = d.slice(2, 5);
+    const p3 = d.slice(5, 7);
+    const p4 = d.slice(7, 9);
+
+    let result = '+375';
+    if (p1) {
+      result += ` (${p1}`;
+      if (p1.length === 2) {
+        result += ')';
+      }
+    }
+    if (p2) result += ` ${p2}`;
+    if (p3) result += `-${p3}`;
+    if (p4) result += `-${p4}`;
+    return result;
+  };
+
+  const getPhoneDigits = () => (phoneInput ? phoneInput.value.replace(/\D/g, '').replace(/^375/, '').slice(0, 9) : '');
+
+  if (phoneInput) {
+    phoneInput.addEventListener('input', () => {
+      phoneInput.value = formatBelarusPhone(getPhoneDigits());
+    });
+  }
+
+  const savedData = typeof window.getRegisterFormData === 'function' ? window.getRegisterFormData() : {};
+  if (emailInput && savedData.email) emailInput.value = savedData.email;
+  if (phoneInput && savedData.phone) phoneInput.value = savedData.phone;
+  if (passwordInput && savedData.password) passwordInput.value = savedData.password;
+  if (repeatInput && savedData.passwordRepeat) repeatInput.value = savedData.passwordRepeat;
+  if (savedData.loginType && loginTypeInputs.length) {
+    loginTypeInputs.forEach((input) => {
+      input.checked = input.value === savedData.loginType;
+    });
+  }
+  if (Array.isArray(savedData.consents) && savedData.consents.length) {
+    consentCheckboxes.forEach((checkbox, index) => {
+      checkbox.checked = Boolean(savedData.consents[index]);
+    });
+  }
 
   const showFieldError = (field, message) => {
     field.classList.add('auth-field--error');
@@ -84,7 +129,21 @@ function initRegisterStepOnePage() {
 
     if (!valid) return;
 
-    sessionStorage.setItem('register_email', emailInput.value.trim());
+    const selectedLoginType = Array.from(loginTypeInputs).find((input) => input.checked);
+    const loginType = selectedLoginType ? selectedLoginType.value : 'email';
+
+    if (typeof window.registerAjaxSaveDraft === 'function') {
+      await window.registerAjaxSaveDraft({
+        email: emailInput ? emailInput.value.trim() : '',
+        phone: phoneInput ? phoneInput.value.trim() : '',
+        phoneDigits: getPhoneDigits(),
+        password: passwordInput ? passwordInput.value : '',
+        passwordRepeat: repeatInput ? repeatInput.value : '',
+        loginType,
+        consents: Array.from(consentCheckboxes).map((checkbox) => checkbox.checked)
+      });
+    }
+
     await fakeAjax();
     const verificationUrl = new URL('./verification.html', window.location.href);
     verificationUrl.searchParams.set('email', emailInput.value.trim());

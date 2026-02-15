@@ -23,7 +23,7 @@
             </div>
 
             <form class="auth-form" id="register-step-3-form" action="javascript:void(0)" method="post">
-              <fieldset class="auth-gender" aria-label="Наличие оборудования">
+              <fieldset class="auth-gender auth-gender--equipment" aria-label="Наличие оборудования">
                 <legend class="sr-only">Наличие оборудования</legend>
                 <label class="auth-gender__option">
                   <input type="radio" name="hasEquipment" value="yes" checked />
@@ -36,14 +36,21 @@
               </fieldset>
 
               <div id="equipment-fields" class="auth-grid">
-                <label class="auth-field"><span>Модель оборудования</span><input type="text" placeholder="Введите модель" /></label>
-                <label class="auth-field"><span>Серийный номер</span><input type="text" placeholder="Введите серийный номер" /></label>
+                <label class="auth-field auth-field--icon-help">
+                  <span class="auth-field__label-with-hint">
+                    Номер карты доступа
+                    <button class="auth-field__hint-trigger" type="button" data-hint-target="equipment-data-hint" aria-label="Подсказка по номеру карты доступа"></button>
+                  </span>
+                  <input id="access-card-number" type="text" placeholder="1234 5678 1234 5678" maxlength="19" inputmode="numeric" />
+                </label>
+                <label class="auth-field"><span>Серийный номер модуля</span><input id="module-serial-number" type="text" placeholder="1234567890" /></label>
+                <p id="equipment-data-hint" class="auth-alert-note is-hidden"><img src="../assets/circle-alert.svg" alt="" width="16" height="16" /><span>Проверьте правильность ввода данных с оборудования. После регистрации изменить эти данные можно будет только через техническую поддержку.</span></p>
               </div>
 
-              <div id="no-equipment-fields" hidden>
+              <div id="no-equipment-fields" class="is-hidden">
                 <div class="auth-delivery-options">
                   <label class="auth-check"><input type="radio" name="deliveryMethod" value="dealer" checked /><span>Получить у дилера</span></label>
-                  <label class="auth-check"><input type="radio" name="deliveryMethod" value="mail" /><span>Доставка почтой</span></label>
+                  <label class="auth-check"><input type="radio" name="deliveryMethod" value="my-address" /><span>На мой адрес</span></label>
                 </div>
                 <p class="auth-alert-note"><img src="../assets/circle-alert.svg" alt="" width="16" height="16" /><span>Если у вас нет оборудования, выберите способ получения.</span></p>
               </div>

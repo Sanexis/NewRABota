@@ -1,1 +1,57 @@
 @use "forgot-password";
+
+.auth-extra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.remember-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.remember-check input {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1px solid #142954;
+  border-radius: 4px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.remember-check input::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 13px;
+  height: 9px;
+  background: url("../assets/check.svg") no-repeat center;
+  background-size: 13px 9px;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center;
+  transition: transform 0.12s ease;
+}
+
+.remember-check input:checked {
+  background: #142954;
+}
+
+.remember-check input:checked::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.forgot-link {
+  color: var(--link);
+  text-decoration: none;
+}

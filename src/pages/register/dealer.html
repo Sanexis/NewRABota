@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация — Выбор дилера</title>
+    <link rel="stylesheet" href="../css/register-page.css" />
+  </head>
+  <body>
+    <main class="auth-layout">
+      <section class="auth-card" aria-label="Регистрация, выбор дилера">
+        <img class="auth-logo" src="../assets/brand-logo.svg" alt="tuta" width="128" height="48" />
+        <div class="auth-card__content">
+          <div class="auth-card__left">
+            <a class="auth-back" href="./step-3.html" aria-label="Вернуться назад">Назад</a>
+            <h1 class="auth-title">Выбор дилера</h1>
+            <p class="auth-subtitle">Вы можете забрать оборудование у выбранного дилера. После регистрации с вами свяжется менеджер для уточнения деталей.</p>
+
+            <form class="auth-form" id="register-dealer-form" action="javascript:void(0)" method="post">
+              <div class="auth-dealer-list" role="radiogroup" aria-label="Список дилеров">
+                <label class="auth-dealer-card">
+                  <input type="radio" name="dealerId" value="1" checked />
+                  <span class="auth-dealer-card__title">Название дилера</span>
+                  <span class="auth-dealer-card__line">Адрес: Минская область, Дзержинский район, Дзержинск, переулок Марта Казея, д.44</span>
+                  <span class="auth-dealer-card__line">Номер телефона: <a href="tel:+375291111111">+375 (29) 111-11-11</a></span>
+                  <span class="auth-dealer-card__line">Режим работы: Пн-Пт с 9:00 до 18:00</span>
+                </label>
+                <label class="auth-dealer-card">
+                  <input type="radio" name="dealerId" value="2" />
+                  <span class="auth-dealer-card__title">Название дилера</span>
+                  <span class="auth-dealer-card__line">Адрес: Минская область, Дзержинский район, Дзержинск, переулок Марта Казея, д.44</span>
+                  <span class="auth-dealer-card__line">Номер телефона: <a href="tel:+375291111111">+375 (29) 111-11-11</a></span>
+                  <span class="auth-dealer-card__line">Режим работы: Пн-Пт с 9:00 до 18:00</span>
+                </label>
+                <label class="auth-dealer-card">
+                  <input type="radio" name="dealerId" value="3" />
+                  <span class="auth-dealer-card__title">Название дилера</span>
+                  <span class="auth-dealer-card__line">Адрес: Минская область, Дзержинский район, Дзержинск, переулок Марта Казея, д.44</span>
+                  <span class="auth-dealer-card__line">Номер телефона: <a href="tel:+375291111111">+375 (29) 111-11-11</a></span>
+                  <span class="auth-dealer-card__line">Режим работы: Пн-Пт с 9:00 до 18:00</span>
+                </label>
+              </div>
+
+              <button class="auth-submit" type="submit">Завершить регистрацию</button>
+            </form>
+
+            <p class="auth-login-link">Есть аккаунт? <a href="../login.html">Авторизация</a></p>
+          </div>
+
+          <div class="auth-card__right" aria-hidden="true">
+            <div class="auth-illustration-wrap">
+              <img src="../assets/forgot-password-illustration.svg" alt="" width="528" height="364" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

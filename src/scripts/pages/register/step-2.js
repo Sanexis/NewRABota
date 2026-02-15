@@ -3,18 +3,71 @@ function initRegisterStepTwoPage() {
   if (!form) return;
 
   const birthDateInput = form.querySelector('#reg-birth-date');
+  const fullNameInput = form.querySelector('#reg-full-name');
   const idNumberInput = form.querySelector('#reg-id-number');
+  const regionInput = form.querySelector('#reg-region');
+  const districtInput = form.querySelector('#reg-district');
+  const cityInput = form.querySelector('#reg-city');
+  const postCodeInput = form.querySelector('#reg-postcode');
+  const fullAddressInput = form.querySelector('#reg-full-address');
+  const profileData = typeof window.getRegisterFormData === 'function' ? window.getRegisterFormData() : {};
+
+  const ensureAirDatepickerAssets = async () => {
+    if (typeof AirDatepicker === 'function') {
+      return;
+    }
+
+    const cssHref = 'https://cdn.jsdelivr.net/npm/air-datepicker@3.5.3/air-datepicker.css';
+    const jsSrc = 'https://cdn.jsdelivr.net/npm/air-datepicker@3.5.3/air-datepicker.js';
+
+    if (!document.querySelector(`link[rel="stylesheet"][href="${cssHref}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = cssHref;
+      document.head.appendChild(link);
+    }
+
+    if (!document.querySelector(`script[src="${jsSrc}"]`)) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = jsSrc;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
+    }
+  };
+
+  if (regionInput && profileData.region) regionInput.value = profileData.region;
+  if (fullNameInput && profileData.fullName) fullNameInput.value = profileData.fullName;
+  if (districtInput && profileData.district) districtInput.value = profileData.district;
+  if (cityInput && profileData.city) cityInput.value = profileData.city;
+  if (postCodeInput && profileData.postCode) postCodeInput.value = profileData.postCode;
+  if (fullAddressInput && profileData.fullAddress) fullAddressInput.value = profileData.fullAddress;
+  if (idNumberInput && profileData.idNumber) idNumberInput.value = profileData.idNumber;
+  if (birthDateInput && profileData.birthDate) birthDateInput.value = profileData.birthDate;
+  if (profileData.gender) {
+    const genderInput = form.querySelector(`input[name="gender"][value="${profileData.gender}"]`);
+    if (genderInput) genderInput.checked = true;
+  }
 
   if (idNumberInput) {
     const sanitizeIdNumber = () => {
-      idNumberInput.value = idNumberInput.value.replace(/\D/g, '').slice(0, 14);
+      idNumberInput.value = idNumberInput.value
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, '')
+        .slice(0, 14);
     };
 
     sanitizeIdNumber();
     idNumberInput.addEventListener('input', sanitizeIdNumber);
   }
 
-  if (birthDateInput && typeof AirDatepicker === 'function') {
+  const initDatepicker = () => {
+    if (!birthDateInput || typeof AirDatepicker !== 'function') {
+      return;
+    }
+
     const ruLocale = {
       days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
       daysShort: ['Вос', 'Пон', 'Вто', 'Сре', 'Чет', 'Пят', 'Суб'],
@@ -40,6 +93,16 @@ function initRegisterStepTwoPage() {
     } catch (error) {
       birthDateInput.type = 'date';
     }
+  };
+
+  if (birthDateInput) {
+    ensureAirDatepickerAssets()
+      .then(() => {
+        initDatepicker();
+      })
+      .catch(() => {
+        birthDateInput.type = 'date';
+      });
   }
 
   const fakeAjax = () => new Promise((resolve) => setTimeout(resolve, 350));
@@ -82,6 +145,21 @@ function initRegisterStepTwoPage() {
     });
 
     if (!valid) return;
+
+    if (typeof window.registerAjaxSaveDraft === 'function') {
+      const selectedGender = form.querySelector('input[name="gender"]:checked');
+      await window.registerAjaxSaveDraft({
+        fullName: fullNameInput ? fullNameInput.value.trim() : '',
+        gender: selectedGender ? selectedGender.value : '',
+        idNumber: idNumberInput ? idNumberInput.value.trim() : '',
+        birthDate: birthDateInput ? birthDateInput.value.trim() : '',
+        region: regionInput ? regionInput.value.trim() : '',
+        district: districtInput ? districtInput.value.trim() : '',
+        city: cityInput ? cityInput.value.trim() : '',
+        postCode: postCodeInput ? postCodeInput.value.trim() : '',
+        fullAddress: fullAddressInput ? fullAddressInput.value.trim() : ''
+      });
+    }
 
     await fakeAjax();
     if (typeof window.navigateRegisterAjax === 'function') {

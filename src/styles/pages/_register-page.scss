@@ -24,6 +24,7 @@
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   justify-content: center;
   font-size: 15px;
   background: #c4c9d4;
@@ -170,6 +171,27 @@
   gap: 10px;
 }
 
+.auth-btn {
+  height: 52px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.auth-btn:disabled {
+  background: #848ca2;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.auth-btn--light {
+  background: #deebff;
+  color: #223d70;
+}
+
 .auth-gender {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -203,6 +225,27 @@
 .auth-gender__option:has(input:checked) {
   background: #E4EEFC;
   border-color: var(--line);
+}
+
+.auth-gender--equipment {
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+  background: #f8fafd;
+}
+
+.auth-gender--equipment .auth-gender__option {
+  border: 0;
+  height: 44px;
+  background: transparent;
+  color: #848ca2;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.auth-gender--equipment .auth-gender__option:has(input:checked) {
+  background: #e4eefc;
+  color: #142954;
 }
 
 .auth-grid {
@@ -300,9 +343,35 @@
 }
 
 .auth-field--icon-help:hover .auth-field__hint,
-.auth-field--icon-help:focus-within .auth-field__hint {
+.auth-field--icon-help:focus-within .auth-field__hint,
+.auth-field--icon-help.is-open .auth-field__hint {
   opacity: 1;
   transform: translateY(0);
+}
+
+.auth-field__hint--bottom {
+  top: calc(100% + 10px);
+  bottom: auto;
+}
+
+.auth-field__hint--bottom::after {
+  top: auto;
+  bottom: 100%;
+  border-top: 0;
+  border-bottom: 6px solid #fff;
+}
+
+.auth-field__label-with-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.auth-field__label-with-hint .auth-field__hint-trigger {
+  position: static;
+  width: 16px;
+  height: 16px;
+  background-size: 14px 14px;
 }
 
 .auth-field--icon-calendar input[type='date'] {
@@ -329,6 +398,81 @@
   font-weight: 500;
 }
 
+.auth-dealer-list {
+  max-height: 360px;
+  overflow: auto;
+  display: grid;
+  gap: 14px;
+  padding-right: 6px;
+}
+
+.auth-dealer-card {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px 14px 42px;
+  border: 1px solid #142954;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.auth-dealer-card input {
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #142954;
+}
+
+.auth-dealer-card__title {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #0a1121;
+}
+
+.auth-dealer-card__line {
+  color: #848ca2;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.auth-dealer-card__line a {
+  color: #142954;
+  text-decoration: underline;
+}
+
+.auth-address-card {
+  border: 1px solid #142954;
+  border-radius: 16px;
+  padding: 18px 20px;
+  background: #fff;
+}
+
+.auth-address-card__caption {
+  margin: 0;
+  color: #848ca2;
+  font-size: 16px;
+}
+
+.auth-address-card__value {
+  margin: 8px 0 0;
+  color: #142954;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.auth-address-card__edit {
+  margin-top: 18px;
+  display: inline-block;
+  color: #4a5d82;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
 .auth-delivery-options {
   display: grid;
   gap: 8px;
@@ -342,4 +486,14 @@
   gap: 8px;
   color: #2b3550;
   font-size: 13px;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+@media (max-width: 525px) {
+  .auth-gender--equipment {
+    grid-template-columns: 1fr;
+  }
 }

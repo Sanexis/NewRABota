@@ -11,6 +11,14 @@ function initAllPages() {
     initRegisterStepThreePage();
   }
 
+  if (typeof initRegisterDealerPage === 'function') {
+    initRegisterDealerPage();
+  }
+
+  if (typeof initRegisterMyAddressPage === 'function') {
+    initRegisterMyAddressPage();
+  }
+
   if (typeof initVerificationPage === 'function') {
     initVerificationPage();
   }
@@ -41,7 +49,7 @@ function initAllPages() {
 }
 
 function isRegisterStepPath(pathname) {
-  return /\/register\/(step-[123]|verification)\.html$/i.test(pathname);
+  return /\/register\/(step-[123]|verification|dealer|my-address)\.html$/i.test(pathname);
 }
 
 let registerAjaxNavigationBound = false;
@@ -122,6 +130,48 @@ async function navigateRegisterAjax(url, options = {}) {
 }
 
 window.navigateRegisterAjax = navigateRegisterAjax;
+
+let registerDraftData = {};
+
+function getRegisterFormData() {
+  return { ...registerDraftData };
+}
+
+function setRegisterFormData(data) {
+  registerDraftData = { ...data };
+}
+
+function mergeRegisterFormData(partial) {
+  const current = getRegisterFormData();
+  const next = { ...current, ...partial };
+  setRegisterFormData(next);
+  return next;
+}
+
+function registerAjaxGetDraft() {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(getRegisterFormData()), 120);
+  });
+}
+
+function registerAjaxSaveDraft(partial) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(mergeRegisterFormData(partial)), 120);
+  });
+}
+
+function completeRegisterFlow(extra = {}) {
+  const payload = { ...getRegisterFormData(), ...extra };
+  setRegisterFormData(payload);
+  alert('вся информация в консоли');
+  console.log('Register payload:', payload);
+}
+
+window.getRegisterFormData = getRegisterFormData;
+window.mergeRegisterFormData = mergeRegisterFormData;
+window.registerAjaxGetDraft = registerAjaxGetDraft;
+window.registerAjaxSaveDraft = registerAjaxSaveDraft;
+window.completeRegisterFlow = completeRegisterFlow;
 
 document.addEventListener('DOMContentLoaded', () => {
   initAllPages();
